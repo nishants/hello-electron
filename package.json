@@ -1,0 +1,19 @@
+{
+  "name": "hello-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishants/hello-electron.git"
+  },
+  "author": "nishants",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/nishants/hello-electron/issues"
+  },
+  "homepage": "https://github.com/nishants/hello-electron#readme"
+}
