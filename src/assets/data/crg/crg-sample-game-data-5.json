@@ -1,0 +1,38 @@
+{
+  "passage": {
+    "from"  : "Their Eyes Were Watching God",
+    "by"    : "Zora Neal Hurston",
+    "text"  : "Ships at a distance have every man's wish on board. For some they come in with the tide. For others they sail forever on the horizon, never out of sight, never landing until the watcher turn his eyes away in resignation, his dreams mocked to death by time. That is the life of men. \n Now, women forget all those things they don't  want to remember, and remember everything they don't want to forget. The dream is the truth. Then they act and do things accordingly."
+  },
+  "agent": {
+    "smallProfilePicture": "assets/images/agents/diana.png",
+    "videoPlaceholder": "assets/images/agents/diana-video-placeholder.png"
+  },
+  "script": {
+    "scenes": [
+      {
+        "name"    : "play-video",
+        "config": {
+          "sceneId"     : "about-explainers",
+          "group"       : "navigators",
+          "subgroup"    : "explainers",
+          "canSkip"     :  true,
+          "autoNext"    :  true,
+          "sceneLoadVideo" : {
+            "fullscreen" : false,
+            "url"        : "assets/videos/diana/about-navigator-explainers.mp4",
+            "type"       : "video/mp4",
+            "transcript" : "A big part of what writers do is explain. They say something—often something you don’t fully understand—and then they explain by adding details, giving examples or about a million other things that help you get what they mean. Punctuation, like commas, dashes, semicolons or even periods, often show up right before an explanation or clarification. But sometimes an author will just drop an explanation in with no notice. In order to understand, connect the explanation back to the word or phrase."
+          }
+        }
+      },
+      {
+        "name"  : "exit",
+        "config": {
+          "group"        : "exit"
+        }
+      }
+
+    ]
+  }
+}

@@ -4,7 +4,40 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "install-app-deps",
+    "start": "npm install && electron ./app",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "site.nishants.zinc",
+    "mac"  : {
+      "category": "public.app-category.developer-tools"
+      },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
   },
   "repository": {
     "type": "git",
@@ -15,5 +48,9 @@
   "bugs": {
     "url": "https://github.com/nishants/hello-electron/issues"
   },
-  "homepage": "https://github.com/nishants/hello-electron#readme"
+  "homepage": "https://github.com/nishants/hello-electron#readme",
+  "devDependencies": {
+    "electron": "^1.6.11",
+    "electron-builder": "^19.16.0"
+  }
 }
