@@ -12,7 +12,7 @@
   "build": {
     "appId": "site.nishants.zinc",
     "mac"  : {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.education"
       },
     "dmg": {
       "contents": [
