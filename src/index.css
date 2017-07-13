@@ -444,6 +444,7 @@ body {
   padding: 0px; }
 
 #crgameplay {
+  position: relative;
   margin: auto;
   background-color: white; }
   #crgameplay .crg-player {
@@ -922,7 +923,7 @@ body {
   /* IE6-9 fallback on horizontal gradient */ }
 
 .subgroup-indicator {
-  position: fixed;
+  position: absolute;
   top: 0px;
   right: 30px;
   width: 325px;
@@ -1143,10 +1144,10 @@ body {
         font-size: 11px;
         font-weight: 400; }
   #crgameplay .text .word, #crg .text .word {
-    display: inline-block;
-    margin-bottom: 5px; }
+    display: inline;
+    -webkit-touch-callout: none; }
   #crgameplay .text .word:not(:first-child), #crg .text .word:not(:first-child) {
-    padding: 0px 2.5px; }
+    margin: 0px 2.5px; }
   #crgameplay .text .word.line-break, #crg .text .word.line-break {
     display: block;
     height: 10px;
@@ -1158,10 +1159,12 @@ body {
   #crgameplay .text .word.selected-word, #crg .text .word.selected-word {
     background-color: #B2D7FF; }
   #crgameplay .text ::selection, #crg .text ::selection {
-    background-color: transparent; }
+    background-color: #B2D7FF; }
   #crgameplay .text .word.highlight, #crg .text .word.highlight {
     background-color: #8db352;
     color: white;
+    margin: 0px;
+    padding: 0px 2.5px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1231,6 +1234,24 @@ body {
   -o-transform: scale(1.2);
   transform: scale(1.2);
   box-shadow: 0px 0px 20px 0px #8db352; }
+
+html.touch #crgameplay .text .selection-options, html.touch #crgameplay .word .selection-options, html.touch #crg .text .selection-options, html.touch #crg .word .selection-options {
+  top: -50px; }
+  html.touch #crgameplay .text .selection-options button.crg, html.touch #crgameplay .word .selection-options button.crg, html.touch #crg .text .selection-options button.crg, html.touch #crg .word .selection-options button.crg {
+    position: relative; }
+  html.touch #crgameplay .text .selection-options button.crg:after, html.touch #crgameplay .word .selection-options button.crg:after, html.touch #crg .text .selection-options button.crg:after, html.touch #crg .word .selection-options button.crg:after {
+    content: "";
+    background-color: transparent;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2); }
 
 #crgameplay button.crg {
   font-family: "Lato", sans-serif;
@@ -1372,10 +1393,10 @@ body {
     margin-right: 60px;
     padding: 10px 0px; }
 
-@media screen and (min-width: 910px) {
+@media screen and (min-width: 770px) {
   .mobile-only {
     display: none !important; } }
-@media screen and (min-width: 650px) and (max-width: 910px) {
+@media screen and (min-width: 650px) and (max-width: 770px) {
   .no-mobile {
     display: none !important; } }
 @media screen and (max-width: 650px) {

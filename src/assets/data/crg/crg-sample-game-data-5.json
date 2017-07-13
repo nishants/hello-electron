@@ -11,19 +11,131 @@
   "script": {
     "scenes": [
       {
-        "name"    : "play-video",
-        "config": {
-          "sceneId"     : "about-explainers",
-          "group"       : "navigators",
-          "subgroup"    : "explainers",
-          "canSkip"     :  true,
-          "autoNext"    :  true,
+        "name"        : "find-phrase",
+        "config":       {
+          "group"       : "zincing",
+          "subgroup"    : "visualize",
+
+          "focus"     : {"indices": [0, 1,2,3,4,5,6,7,8,9], "text": "Ships at a distance have every man's wish on board"},
+          "expectedCorrectAnswers" : 1,
+          "wrongAttemptsAllowed" : 3,
+          "correctOptions": [
+            {
+              "phrase": {
+                "indices": [0, 1,2,3],
+                "text": "Ships at a distance"
+              },
+              "successVideo" : {
+                "url" : "assets/videos/diana/ships-at-distance-is-correct.mp4",
+                "type" : "video/mp4",
+                "transcript" : "Nice work! Great job noticing that what Hurston wants you to picture is the whole phrase, right? Not just “ships” but “ships at a distance."
+              }
+
+            }
+          ],
+          "partialCorrectOptions": [
+            {
+              "phrase": {
+                "indices": [0],
+                "text": "Ships"
+              },
+              "successVideo" : {
+                "url" : "assets/videos/diana/full-phrase-ships-at-distance.mp4",
+                "type" : "video/mp4",
+                "transcript" : "Cool. Maybe you’re picturing a sailboat or a cruise ship. That’s a great start. Now take it all the way. Hurston wants you to picture more than just ships. You need to take in the whole phrase — “ships at a distance."
+              }
+            },
+            {
+              "phrase": {
+                "indices": [1,2,3],
+                "text": "at a distance"
+              },
+              "successVideo" : {
+                "url" : "assets/videos/diana/what-at-a-distance.mp4",
+                "type" : "video/mp4",
+                "transcript" : "What’s at a distance? Highlight the whole phrase "
+              }
+            }
+          ],
+          "wrongAttemptMessages" : [
+            {
+              "url" : "assets/videos/diana/wrong-attempt-1.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Look, if you try hard enough, you could probably come up with an image in your brain for any word, but what’s the strongest visual in this sentence? What’s easiest to picture? "
+            },
+            {
+              "url" : "assets/videos/diana/try-again.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Try again !"
+            },
+            {
+              "url" : "assets/videos/diana/easiest-one-was.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Well, the easiest one we could see was “ships at a distance.”"
+            }
+          ],
           "sceneLoadVideo" : {
-            "fullscreen" : false,
-            "url"        : "assets/videos/diana/about-navigator-explainers.mp4",
-            "type"       : "video/mp4",
-            "transcript" : "A big part of what writers do is explain. They say something—often something you don’t fully understand—and then they explain by adding details, giving examples or about a million other things that help you get what they mean. Punctuation, like commas, dashes, semicolons or even periods, often show up right before an explanation or clarification. But sometimes an author will just drop an explanation in with no notice. In order to understand, connect the explanation back to the word or phrase."
+            "url" : "assets/videos/diana/visualize-from-first-sentence.mp4",
+            "type" : "video/mp4",
+            "transcript" : "So, highlight a word or phrase you can easily picture from the first sentence."
           }
+        }
+      },
+      {
+        "name"        : "drag-drop-text",
+        "config"      :   {
+          "group"     : "navigators",
+          "subgroup"  : "explainers",
+          "phrase"    : {
+            "indices": [40],
+            "text": "resignation"
+          },
+          "relations" : [
+            {
+              "draggable": {
+                "indices": [41,42,43,44,45,46,47],
+                "text": "his dreams mocked to death by Time."
+              },
+              "droppable": {
+                "indices": [41,42,43,44,45,46,47],
+                "text": "his dreams mocked to death by Time."
+              }
+            },
+            {
+              "draggable": {
+                "indices": [40],
+                "text": "resignation"
+              },
+              "droppable": {
+                "indices": [41,42,43,44,45,46,47],
+                "text": "his dreams mocked to death by Time."
+              }
+            }
+          ],
+          "expectedCorrectAnswers" : 1,
+          "wrongAttemptMessages" : [
+            {
+              "url" : "assets/videos/diana/wrong-attempt-1.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Look, if you try hard enough, you could probably come up with an image in your brain for any word, but what’s the strongest visual in this sentence? What’s easiest to picture? "
+            },
+            {
+              "url" : "assets/videos/diana/try-again.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Try again !"
+            }
+          ],
+          "onFinish" : {
+            "url" : "assets/videos/diana/right.mp4",
+            "type" : "video/mp4",
+            "transcript" : "right!"
+          },
+          "sceneLoadVideo" : {
+            "url" : "assets/videos/diana/why-the-resignation.mp4",
+            "type" : "video/mp4",
+            "transcript" : "What about the Watcher turning his eyes away in resignation? Why the resignation? Drag the word or phrase that explains it to “resignation.”"
+          },
+          "transcript": {"text": "What about the Watcher turning his eyes away in resignation? Why the resignation? Drag the word or phrase that explains it to “resignation.”"}
         }
       },
       {
