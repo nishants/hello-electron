@@ -1,22 +1,14 @@
 
-<div id="crgameplay">
-  <div class="crg-player">
-    <div class="header">
-      <div class="logo"><img src="assets/images/zinc-logo-small.png"/></div>
-      <div class="crgame-progress">
-        <div style="width: {{100 - 100/game.player.groups.length}}%" class="connector"></div>
-        <ul>
-          <li ng-repeat="group in game.player.groups" ng-class="{&quot;current&quot; : game.player.state.group == group.name}" style="width: calc(100%/{{game.player.groups.length}})">
-            <label>{{group.label}}</label>
-          </li>
-        </ul>
+<div id="crgameplay" class="viewport-safari-fix">
+  <div class="crg-player body">
+    <div class="left-pane">
+      <div class="header">
+        <div class="logo"><img src="assets/images/zinc-logo-small.png"/></div>
       </div>
-    </div>
-    <div class="body">
       <div class="controls">
         <div class="points">
-          <div class="value">10</div>
-          <label>Points</label>
+          <label class="fa fa-star-o"></label>
+          <div class="value">987</div>
         </div>
         <div class="sound">
           <button class="fa fa-volume-up"></button>
@@ -25,116 +17,139 @@
           <button class="fa fa-sign-out"></button>
         </div>
       </div>
-      <div ng-init="passage = game.player.passage" class="passage">
-        <div class="title"><span>From:&nbsp;</span><span ng-bind="passage.from" class="from"></span></div>
-        <div class="author"><span>By&nbsp;</span><span ng-bind="passage.by" class="by"></span></div>
-        <div on-text-select="onTextSelect($selection.indices)" ng-class="{&quot;focusing&quot; : game.player.state.focusPhrase.indices.length || editor.passageSelector.selection.focus.indices.length}" class="text phrase-selector selection-pointer">
-          <div class="selection-options">
-            <div ng-show="game.player.state.textSelectedIsClose" class="close-enough-selection">
-              <label>Almost there. You need to select complete phrase</label>
-            </div>
-            <div ng-show="game.player.state.selectingText" class="text-selection">
-              <button ng-click="game.player.submitText($selection)" class="crg select-phrase">Select Text</button>
-              <div class="pointer"></div>
-            </div>
-            <div ng-show="game.player.state.drag" class="drag-mask">
-              <div ng-drag="true" data-allow-transform="true" draggable="true" class="drag-handle">
-                <button class="crg drag-phrase"><span class="icon fa fa-arrows"></span><span>Hold Here To Drag</span></button>
-                <div class="pointer"></div><span ng-bind="game.player.state.drag.text" class="text"></span>
-              </div>
-            </div>
-            <div class="passage-selection">
-              <button ng-click="editor.passageSelector.selection.setFocus($selection.indices)" ng-show="editor.passageSelector.selection.selectingFocus" class="selectFocus">Set Focus</button>
-              <button ng-click="editor.passageSelector.selection.setPhrase($selection.indices)" ng-show="editor.passageSelector.selection.selectingPhrase" class="selectPhrase">Set Phrase</button>
-            </div>
+    </div>
+    <div class="central-content">
+      <div class="passage-container">
+        <div class="header">
+          <div class="crgame-progress">
+            <div style="width: {{100 - 100/game.player.groups.length}}%" class="connector"></div>
+            <ul>
+              <li ng-repeat="group in game.player.groups" ng-class="{&quot;current&quot; : game.player.state.group == group.name}" style="width: calc(100%/{{game.player.groups.length}})">
+                <label>{{group.label}}</label>
+              </li>
+            </ul>
           </div>
-          <div ng-show="game.player.state.dragRelations.length" class="text-drag-mask">
-            <div ng-repeat="relation in game.player.state.dragRelations" class="relations">
-              <div phrase="relation.draggable" ng-drag="true" data-allow-transform="true" draggable="true" ng-drag-start="game.player.state.draggingText(relation)" class="draggable-text mask-phrase"><span ng-bind="relation.draggable.text" class="word highlight"></span></div>
-              <div phrase="relation.droppable" ng-drop="true" ng-drop-success="game.player.state.droppedTextOnRelation(relation)" class="droppable-text mask-phrase">
-                <!--span(ng-bind='relation.droppable.text')-->
+        </div>
+        <div ng-init="passage = game.player.passage" class="passage">
+          <div class="title"><span>From:&nbsp;</span><span ng-bind="passage.from" class="from"></span></div>
+          <div class="author"><span>by&nbsp;</span><span ng-bind="passage.by" class="by"></span></div>
+          <div on-text-select="onTextSelect($selection.indices)" on-text-select-touch="onTextSelectTouch($selection.indices)" ng-class="{&quot;focusing&quot; : game.player.state.focusPhrase.indices.length || editor.passageSelector.selection.focus.indices.length}" class="text phrase-selector selection-pointer">
+            <div class="selection-options">
+              <div ng-show="game.player.state.textSelectedIsClose" class="close-enough-selection">
+                <label>Almost there. You need to select complete phrase</label>
+              </div>
+              <div ng-show="game.player.state.selectingText" class="text-selection">
+                <button ng-click="game.player.submitText($selection)" class="crg select-phrase">Select Text</button>
+                <div class="pointer"></div>
+              </div>
+              <div ng-show="game.player.state.drag" class="drag-mask">
+                <div ng-drag="true" data-allow-transform="true" draggable="true" class="drag-handle">
+                  <button class="crg drag-phrase"><span class="icon fa fa-arrows"></span><span>Hold Here To Drag</span></button>
+                  <div class="pointer"></div><span ng-bind="game.player.state.drag.text" class="text"></span>
+                </div>
+              </div>
+              <div class="passage-selection">
+                <button ng-click="editor.passageSelector.selection.setFocus($selection.indices)" ng-show="editor.passageSelector.selection.selectingFocus" class="selectFocus">Set Focus</button>
+                <button ng-click="editor.passageSelector.selection.setPhrase($selection.indices)" ng-show="editor.passageSelector.selection.selectingPhrase" class="selectPhrase">Set Phrase</button>
               </div>
             </div>
-          </div><span ng-repeat="word in passage.words" ng-class="{&quot;line-break&quot; : word.linebreak, &quot;highlight&quot;: word.highlight, &quot;focus&quot;: word.focus, &quot;flash&quot;: word.flash}" data-word-number="{{$index}}" class="word">{{word.text}}</span>
+            <div ng-show="game.player.state.dragRelations.length" class="text-drag-mask">
+              <div ng-drop="true" ng-drop-success="game.player.state.wrongTextDropped(relation)" class="wrong-drop-container"></div>
+              <div ng-repeat="relation in game.player.state.dragRelations" class="relations">
+                <div phrase="relation.draggable" ng-drag="true" data-allow-transform="true" draggable="true" ng-drag-start="game.player.state.draggingText(relation)" class="draggable-text mask-phrase"><span ng-bind="relation.draggable.text" class="word highlight"></span></div>
+                <div phrase="relation.droppable" ng-drop="true" ng-drop-success="game.player.state.droppedTextOnRelation(relation)" class="droppable-text mask-phrase">
+                  <!--span(ng-bind='relation.droppable.text')-->
+                </div>
+              </div>
+            </div><span ng-repeat="word in passage.words" ng-class="{&quot;line-break&quot; : word.linebreak, &quot;highlight&quot;: word.highlight, &quot;focus&quot;: word.focus, &quot;flash&quot;: word.flash}" data-word-number="{{$index}}" ng-show="word.text.length || word.linebreak" class="word">{{word.text}}</span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div ng-show="game.player.subgroups.length" class="subgroup-indicator">
-    <div class="connector"></div>
-    <ul>
-      <li ng-repeat="subgroup in game.player.subgroups" ng-class="{&quot;current&quot;: subgroup.id == game.player.state.subgroup}" ng-bind="subgroup.label"></li>
-    </ul>
-  </div>
-  <div ng-class="{&quot;show-chat&quot; : game.player.mode.chat, &quot;show-full-screen-video&quot; : game.player.video.fullscreen}" class="chat-window">
-    <div class="chat-shutter">
-      <div class="video-container">
-        <div id="crg-video-player" video-player="video-player" video-url="game.player.video.url" video-type="game.player.video.type" after-video="game.player.video.ended()" class="video-player"></div>
-        <button ng-if="game.player.state.skip.allowed" ng-click="game.player.state.skip.onClick()" class="skip"><span>Skip</span>
-          <div class="fa fa-chevron-right"></div>
-        </button>
-      </div>
-      <div ng-click="game.player.mode.chat = !game.player.mode.chat" class="toggle-chat-mode">
-        <div class="showing-video-mode">
-          <label>Show Transcript</label><span class="fa fa-chevron-down"></span>
-        </div>
-        <div class="showing-chat-mode">
-          <label>Show Video</label><span class="fa fa-chevron-down"></span>
-        </div>
-      </div>
-      <div scroll-to-bottom-on-resize="scroll-to-bottom-on-resize" class="chat-history">
-        <ul class="dialogues">
-          <li ng-repeat="dialogue in game.player.chat.dialogues" ng-class="dialogue.sender.type" class="dialogue"><img ng-src="{{dialogue.sender.image}}" class="sender"/>
-            <div class="message">
-              <div ng-bind="dialogue.text" class="message-text"></div>
-            </div>
-          </li>
-          <li class="agent dialogue"><img ng-src="{{game.player.chat.agent.image}}" class="sender"/>
-            <div class="message">
-              <div text="game.player.state.transcript.text" typing-speed="25" before-typing="game.player.chat.input.ready = false;" after-typing="game.player.chat.input.ready = true" class="typewriter message-text"></div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div ng-class="{&quot;ready&quot; :game.player.chat.input.ready}" class="chat-input">
-      <div class="chat-input-form">
-        <div ng-if="game.player.state.pollResult.length" ng-init="pollResult = game.player.state.pollResult" class="poll-result">
+    <div class="right-pane">
+      <div ng-class="{&quot;show-chat&quot; : game.player.mode.chat, &quot;show-full-screen-video&quot; : game.player.video.fullscreen}" class="player-console">
+        <div ng-show="game.player.subgroups.length" class="subgroup-indicator">
+          <div class="connector"></div>
           <ul>
-            <li ng-repeat="result in pollResult" class="poll-score">
-              <label>{{result.label}} ({{result.score}}%)</label>
-            </li>
+            <li ng-repeat="subgroup in game.player.subgroups" ng-class="{&quot;current&quot;: subgroup.id == game.player.state.subgroup}" ng-bind="subgroup.label"></li>
           </ul>
         </div>
-        <ul ng-if="game.player.state.options.length" class="select-options">
-          <li ng-repeat="option in game.player.state.options" ng-init="option.input=false" ng-click="option.input = !option.input">
-            <div ng-show="option.input" class="check-box selected fa fa-check-square"></div>
-            <div ng-hide="option.input" class="check-box fa fa-square-o"></div>
-            <label>{{option.label}}</label>
-          </li>
-        </ul>
-        <ul ng-show="game.player.state.buttons.length" class="buttons">
-          <li ng-repeat="button in game.player.state.buttons">
-            <button ng-click="button.onClick()" class="crg">{{button.label}}</button>
-          </li>
-        </ul>
-        <ul ng-show="game.player.state.dropBoxes" class="drop-area">
-          <li ng-repeat="dropBox in game.player.state.dropBoxes" ng-drop="true" ng-drop-success="dropBox.onDrop()">
-            <label ng-bind="dropBox.label"></label>
-          </li>
-        </ul>
-        <div ng-if="game.player.state.showInput" class="user-input">
-          <textarea ng-model="game.player.input" placeholder="Type here"></textarea>
-          <button ng-click="game.player.state.submitInput(game.player.input)" ng-class="{&quot;disabled-input&quot;: !game.player.input.length}" class="crg button-outline submit">Save</button>
+        <div class="video-player-container">
+          <div id="crg-video-player" video-player="video-player" video-url="game.player.video.url" video-type="game.player.video.type" after-video="game.player.video.ended()" class="video-player"></div>
+          <button ng-if="game.player.video.canSkip" ng-click="game.player.state.skip.onClick()" class="skip"><span>Skip</span>
+            <div class="fa fa-chevron-right"></div>
+          </button>
+        </div>
+        <div class="chat-window">
+          <div class="slider">
+            <div ng-click="game.player.mode.chat = !game.player.mode.chat" class="toggle-chat-mode">
+              <div class="showing-video-mode">
+                <label>Show Transcript</label><span class="fa fa-chevron-down"></span>
+              </div>
+              <div class="showing-chat-mode">
+                <label>Show Video</label><span class="fa fa-chevron-down"></span>
+              </div>
+            </div>
+            <div scroll-to-bottom-on-resize="scroll-to-bottom-on-resize" class="chat-history">
+              <ul class="dialogues">
+                <li ng-repeat="dialogue in game.player.chat.dialogues" ng-class="dialogue.sender.type" class="dialogue"><img ng-src="{{dialogue.sender.image}}" class="sender"/>
+                  <div class="message">
+                    <div ng-bind="dialogue.text" class="message-text"></div>
+                  </div>
+                </li>
+                <li ng-show="game.player.state.transcript.text &amp;&amp; game.player.state.transcript.text.length" class="agent dialogue"><img ng-src="{{game.player.chat.agent.image}}" class="sender"/>
+                  <div class="message">
+                    <div text="game.player.state.transcript.text" typing-speed="17" before-typing="game.player.chat.input.ready = false;" after-typing="game.player.chat.input.ready = true" class="typewriter message-text"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div ng-class="{&quot;ready&quot; :game.player.chat.input.ready}" class="console-user-input">
+          <div class="chat-input-form">
+            <div ng-if="game.player.state.pollResult.length" ng-init="pollResult = game.player.state.pollResult" class="poll-result">
+              <ul>
+                <li ng-repeat="result in pollResult" class="poll-score">
+                  <label>{{result.label}} ({{result.score}}%)</label>
+                </li>
+              </ul>
+            </div>
+            <ul ng-if="game.player.state.options.length" class="select-options">
+              <li ng-repeat="option in game.player.state.options" ng-init="option.input=false" ng-click="option.input = !option.input">
+                <div ng-show="option.input" class="check-box selected fa fa-check-square"></div>
+                <div ng-hide="option.input" class="check-box fa fa-square-o"></div>
+                <label>{{option.label}}</label>
+              </li>
+            </ul>
+            <ul ng-show="game.player.state.buttons.length" class="buttons">
+              <li ng-repeat="button in game.player.state.buttons">
+                <button ng-click="button.onClick()" class="crg">{{button.label}}</button>
+              </li>
+            </ul>
+            <ul ng-show="game.player.state.dropBoxes.length" class="drop-area">
+              <li ng-repeat="dropBox in game.player.state.dropBoxes" ng-drop="true" ng-drop-success="dropBox.onDrop()">
+                <label ng-bind="dropBox.label"></label>
+              </li>
+            </ul>
+            <div ng-if="game.player.state.showInput" class="user-input">
+              <textarea ng-model="game.player.input" placeholder="Type here"></textarea>
+              <button ng-click="game.player.state.submitInput(game.player.input)" ng-class="{&quot;disabled-input&quot;: !game.player.input.length}" class="crg button-outline submit">Save</button>
+            </div>
+            <div ng-if="game.player.state.message" class="text-message">
+              <textarea disabled="disabled" ,="," ng-bind="game.player.state.message.text"></textarea>
+              <button ng-click="game.player.state.message.button.onClick()" class="crg button-outline submit">{{game.player.state.message.button.label}}</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div ng-show="game.player.state.showTextSelectionHelp" class="text-selection-help">
-    <div class="help-container">
-      <div class="help-image"><img src="assets/images/text-selection-help.gif"/></div>
-      <div class="close-help">
-        <button ng-click="game.player.state.showTextSelectionHelp = false" class="crg">Got It</button>
+      <div ng-show="game.player.state.showTextSelectionHelp" class="text-selection-help">
+        <div class="help-container">
+          <div class="help-image"><img src="assets/images/text-selection-help.gif"/></div>
+          <div class="close-help">
+            <button ng-click="game.player.state.showTextSelectionHelp = false" class="crg">Got It</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -11,73 +11,16 @@
   "script": {
     "scenes": [
       {
-        "name"        : "find-phrase",
-        "config":       {
-          "group"       : "zincing",
-          "subgroup"    : "visualize",
-
-          "focus"     : {"indices": [0, 1,2,3,4,5,6,7,8,9], "text": "Ships at a distance have every man's wish on board"},
-          "expectedCorrectAnswers" : 1,
-          "wrongAttemptsAllowed" : 3,
-          "correctOptions": [
-            {
-              "phrase": {
-                "indices": [0, 1,2,3],
-                "text": "Ships at a distance"
-              },
-              "successVideo" : {
-                "url" : "assets/videos/diana/ships-at-distance-is-correct.mp4",
-                "type" : "video/mp4",
-                "transcript" : "Nice work! Great job noticing that what Hurston wants you to picture is the whole phrase, right? Not just “ships” but “ships at a distance."
-              }
-
-            }
-          ],
-          "partialCorrectOptions": [
-            {
-              "phrase": {
-                "indices": [0],
-                "text": "Ships"
-              },
-              "successVideo" : {
-                "url" : "assets/videos/diana/full-phrase-ships-at-distance.mp4",
-                "type" : "video/mp4",
-                "transcript" : "Cool. Maybe you’re picturing a sailboat or a cruise ship. That’s a great start. Now take it all the way. Hurston wants you to picture more than just ships. You need to take in the whole phrase — “ships at a distance."
-              }
-            },
-            {
-              "phrase": {
-                "indices": [1,2,3],
-                "text": "at a distance"
-              },
-              "successVideo" : {
-                "url" : "assets/videos/diana/what-at-a-distance.mp4",
-                "type" : "video/mp4",
-                "transcript" : "What’s at a distance? Highlight the whole phrase "
-              }
-            }
-          ],
-          "wrongAttemptMessages" : [
-            {
-              "url" : "assets/videos/diana/wrong-attempt-1.mp4",
-              "type" : "video/mp4",
-              "transcript" : "Look, if you try hard enough, you could probably come up with an image in your brain for any word, but what’s the strongest visual in this sentence? What’s easiest to picture? "
-            },
-            {
-              "url" : "assets/videos/diana/try-again.mp4",
-              "type" : "video/mp4",
-              "transcript" : "Try again !"
-            },
-            {
-              "url" : "assets/videos/diana/easiest-one-was.mp4",
-              "type" : "video/mp4",
-              "transcript" : "Well, the easiest one we could see was “ships at a distance.”"
-            }
-          ],
+        "name"  : "play-video",
+        "config": {
+          "group"       : "intro",
+          "autoNext"    : true,
           "sceneLoadVideo" : {
-            "url" : "assets/videos/diana/visualize-from-first-sentence.mp4",
-            "type" : "video/mp4",
-            "transcript" : "So, highlight a word or phrase you can easily picture from the first sentence."
+            "fullscreen"  : false,
+            "url"         : "assets/videos/diana-voice-over/1.2.Welcome.mp4",
+            "type"        : "video/mp4",
+            "transcript"  : "Welcome back to Zinc. Today we’re going to work with the opening to Zora Neal Hurston’s book, Their Eyes Were Watching God.",
+            "canSkip"     : true
           }
         }
       },
@@ -85,57 +28,61 @@
         "name"        : "drag-drop-text",
         "config"      :   {
           "group"     : "navigators",
-          "subgroup"  : "explainers",
+          "subgroup"  : "pronouns",
           "phrase"    : {
-            "indices": [40],
-            "text": "resignation"
+            "indices": [12, 20],
+            "text": "they"
           },
           "relations" : [
             {
               "draggable": {
-                "indices": [41,42,43,44,45,46,47],
-                "text": "his dreams mocked to death by Time."
+                "indices": [12],
+                "text": "they"
               },
               "droppable": {
-                "indices": [41,42,43,44,45,46,47],
-                "text": "his dreams mocked to death by Time."
+                "indices": [0],
+                "text": "Ships"
               }
             },
             {
               "draggable": {
-                "indices": [40],
-                "text": "resignation"
+                "indices": [20],
+                "text": "they"
               },
               "droppable": {
-                "indices": [41,42,43,44,45,46,47],
-                "text": "his dreams mocked to death by Time."
+                "indices": [0],
+                "text": "Ships"
               }
             }
           ],
           "expectedCorrectAnswers" : 1,
           "wrongAttemptMessages" : [
             {
-              "url" : "assets/videos/diana/wrong-attempt-1.mp4",
+              "url" : "assets/videos/diana-voice-over/3.6a-nops-try-again.mp4",
               "type" : "video/mp4",
-              "transcript" : "Look, if you try hard enough, you could probably come up with an image in your brain for any word, but what’s the strongest visual in this sentence? What’s easiest to picture? "
+              "transcript" : "Nope. Try again."
             },
             {
-              "url" : "assets/videos/diana/try-again.mp4",
+              "url" : "assets/videos/diana-voice-over/3.6b-still-not-right.mp4",
               "type" : "video/mp4",
-              "transcript" : "Try again !"
+              "transcript" : "Still not right. Give it another shot."
+            },
+            {
+              "url" : "assets/videos/diana-voice-over/3.6c-not-clicking.mp4",
+              "type" : "video/mp4",
+              "transcript" : "Hm. It’s not clicking for you. Here’s what we mean. "
             }
           ],
-          "onFinish" : {
-            "url" : "assets/videos/diana/right.mp4",
-            "type" : "video/mp4",
-            "transcript" : "right!"
-          },
           "sceneLoadVideo" : {
-            "url" : "assets/videos/diana/why-the-resignation.mp4",
+            "url" : "assets/videos/diana-voice-over/3.5-take-the-word-they.mp4",
             "type" : "video/mp4",
-            "transcript" : "What about the Watcher turning his eyes away in resignation? Why the resignation? Drag the word or phrase that explains it to “resignation.”"
+            "transcript" : "Take the word \"they” in the second and third sentences. Who’s \"they”? Drag and drop \"they” onto the word or phrase that \"they” represents."
           },
-          "transcript": {"text": "What about the Watcher turning his eyes away in resignation? Why the resignation? Drag the word or phrase that explains it to “resignation.”"}
+          "onFinish" : {
+            "url" : "assets/videos/diana-voice-over/3.7-the-only-thing.mp4",
+            "type" : "video/mp4",
+            "transcript" : "The only thing that’s been mentioned that could come in with the tide or sail forever on the horizon would be the SHIPS, so \"they\" has to mean \"ships\"."
+          }
         }
       },
       {

@@ -16,8 +16,8 @@
     <div class="crg-passage">
       <div ng-init="passage = editor.passageSelector.passage" class="passage">
         <div class="title"><span>From:&nbsp;</span><span ng-bind="passage.from" class="from"></span></div>
-        <div class="author"><span>By&nbsp;</span><span ng-bind="passage.by" class="by"></span></div>
-        <div on-text-select="onTextSelect($selection.indices)" ng-class="{&quot;focusing&quot; : game.player.state.focusPhrase.indices.length || editor.passageSelector.selection.focus.indices.length}" class="text phrase-selector selection-pointer">
+        <div class="author"><span>by&nbsp;</span><span ng-bind="passage.by" class="by"></span></div>
+        <div on-text-select="onTextSelect($selection.indices)" on-text-select-touch="onTextSelectTouch($selection.indices)" ng-class="{&quot;focusing&quot; : game.player.state.focusPhrase.indices.length || editor.passageSelector.selection.focus.indices.length}" class="text phrase-selector selection-pointer">
           <div class="selection-options">
             <div ng-show="game.player.state.textSelectedIsClose" class="close-enough-selection">
               <label>Almost there. You need to select complete phrase</label>
@@ -38,13 +38,14 @@
             </div>
           </div>
           <div ng-show="game.player.state.dragRelations.length" class="text-drag-mask">
+            <div ng-drop="true" ng-drop-success="game.player.state.wrongTextDropped(relation)" class="wrong-drop-container"></div>
             <div ng-repeat="relation in game.player.state.dragRelations" class="relations">
               <div phrase="relation.draggable" ng-drag="true" data-allow-transform="true" draggable="true" ng-drag-start="game.player.state.draggingText(relation)" class="draggable-text mask-phrase"><span ng-bind="relation.draggable.text" class="word highlight"></span></div>
               <div phrase="relation.droppable" ng-drop="true" ng-drop-success="game.player.state.droppedTextOnRelation(relation)" class="droppable-text mask-phrase">
                 <!--span(ng-bind='relation.droppable.text')-->
               </div>
             </div>
-          </div><span ng-repeat="word in passage.words" ng-class="{&quot;line-break&quot; : word.linebreak, &quot;highlight&quot;: word.highlight, &quot;focus&quot;: word.focus, &quot;flash&quot;: word.flash}" data-word-number="{{$index}}" class="word">{{word.text}}</span>
+          </div><span ng-repeat="word in passage.words" ng-class="{&quot;line-break&quot; : word.linebreak, &quot;highlight&quot;: word.highlight, &quot;focus&quot;: word.focus, &quot;flash&quot;: word.flash}" data-word-number="{{$index}}" ng-show="word.text.length || word.linebreak" class="word">{{word.text}}</span>
         </div>
       </div>
     </div>
