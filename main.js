@@ -7,9 +7,10 @@ const {app, BrowserWindow, ipcMain} = electron;
 const path = require('path')
 const url = require('url')
 
-const downloadDir = pathFromHome("Desktop/downloaded");
-const fileUrl = "https://www.wordlayouts.com/wp-content/uploads/2016/03/Personal-Statement-Example-02.zip?57dcdf";
-const downloadTempFile = pathFromHome("Desktop/downloaded/dist.zip");
+const appHome = pathFromHome(".zinc");
+const downloadDir = pathFromHome(".zinc/downloads");
+const fileUrl = "http://nishants.site/dist.zip";
+const downloadTempFile = pathFromHome(".zinc/downloads/dist.zip");
 const sourceDir = __dirname + "/src";
 
 var downloadListener;
@@ -17,6 +18,15 @@ var downloadListener;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+
+function setup(){
+  if (!fs.existsSync(appHome)){
+    fs.mkdirSync(appHome);
+  }  if (!fs.existsSync(downloadDir)){
+    fs.mkdirSync(downloadDir);
+  }
+}
+setup();
 
 function createWindow () {
   // Create the browser window.
@@ -52,7 +62,6 @@ app.on('ready', createWindow)
 
 downloadFile(fileUrl, downloadTempFile);
 
-//unzipFile(downloadTempFile, downloadDir);
 
 app.on('window-all-closed', () => {
   app.quit()
@@ -69,7 +78,7 @@ app.on('activate', () => {
 })
 
 function downloadFile(file_url , targetPath){
-  // Save variable to know progress
+
   var received_bytes = 0;
   var total_bytes = 0;
 
@@ -105,6 +114,7 @@ function showProgress(received,total){
 }
 
 function downloadFinished(){
+  unzipFile(downloadTempFile, downloadDir);
   downloadListener && downloadListener.downloadFinished();
 }
 
