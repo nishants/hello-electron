@@ -11,9 +11,9 @@
   },
   "build": {
     "appId": "site.nishants.zinc",
-    "mac"  : {
+    "mac": {
       "category": "public.app-category.education"
-      },
+    },
     "dmg": {
       "contents": [
         {
@@ -52,5 +52,8 @@
   "devDependencies": {
     "electron": "^1.6.11",
     "electron-builder": "^19.16.0"
+  },
+  "dependencies": {
+    "adm-zip": "^0.4.7"
   }
 }

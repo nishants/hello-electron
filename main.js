@@ -6,6 +6,10 @@ const {app, BrowserWindow, ipcMain} = electron;
 const path = require('path')
 const url = require('url')
 
+const downloadDir = "/Users/dawn/Desktop/downloaded";
+const downloadTempFile = "/Users/dawn/Desktop/downloaded/dist.zip";
+const sourceDir = __dirname + "/src";
+
 var downloadListener;
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -22,7 +26,7 @@ function createWindow () {
   console.log(height);
   // and load the index.html of the app.
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'src/index.html'),
+    pathname: path.join(sourceDir, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
@@ -43,8 +47,11 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
-// Quit when all windows are closed.
-downloadFile("http://nishants.site/dist.zip", "/Users/dawn/Desktop/downloaded/dist.zip");
+
+//downloadFile("http://nishants.site/dist.zip", "/Users/dawn/Desktop/downloaded/dist.zip");
+
+unzipFile(downloadTempFile, downloadDir);
+
 app.on('window-all-closed', () => {
   app.quit()
 })
@@ -108,3 +115,10 @@ ipcMain.on('get-downloader', (event, arg) => {
 // Reply on async message from renderer process
 event.sender.send('you-are-listening', "getting updates ?");
 });
+
+
+function unzipFile(zipFilePath, outputPath){
+  var AdmZip = require('adm-zip');
+  var zip = new AdmZip(zipFilePath);
+  zip.extractAllTo(outputPath, /*overwrite*/true);
+}
