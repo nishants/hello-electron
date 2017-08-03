@@ -1,13 +1,15 @@
-var electron = require('electron');
-var request = require('request');
-var fs = require('fs');
+const electron = require('electron');
+const request = require('request');
+const fs = require('fs');
 
 const {app, BrowserWindow, ipcMain} = electron;
+
 const path = require('path')
 const url = require('url')
 
-const downloadDir = "/Users/dawn/Desktop/downloaded";
-const downloadTempFile = "/Users/dawn/Desktop/downloaded/dist.zip";
+const downloadDir = pathFromHome("Desktop/downloaded");
+const fileUrl = "http://nishants.site/dist.zip";
+const downloadTempFile = pathFromHome("Desktop/downloaded/dist.zip");
 const sourceDir = __dirname + "/src";
 
 var downloadListener;
@@ -48,7 +50,7 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
-//downloadFile("http://nishants.site/dist.zip", "/Users/dawn/Desktop/downloaded/dist.zip");
+//downloadFile(fileUrl, downloadTempFile);
 
 unzipFile(downloadTempFile, downloadDir);
 
@@ -121,4 +123,11 @@ function unzipFile(zipFilePath, outputPath){
   var AdmZip = require('adm-zip');
   var zip = new AdmZip(zipFilePath);
   zip.extractAllTo(outputPath, /*overwrite*/true);
+}
+
+function pathFromHome(path){
+  return getUserHome() + "/" + path
+}
+function getUserHome() {
+  return process.env.HOME || process.env.USERPROFILE;
 }
