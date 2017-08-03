@@ -8,7 +8,7 @@ const path = require('path')
 const url = require('url')
 
 const downloadDir = pathFromHome("Desktop/downloaded");
-const fileUrl = "http://nishants.site/dist.zip";
+const fileUrl = "https://www.wordlayouts.com/wp-content/uploads/2016/03/Personal-Statement-Example-02.zip?57dcdf";
 const downloadTempFile = pathFromHome("Desktop/downloaded/dist.zip");
 const sourceDir = __dirname + "/src";
 
@@ -50,9 +50,9 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
-//downloadFile(fileUrl, downloadTempFile);
+downloadFile(fileUrl, downloadTempFile);
 
-unzipFile(downloadTempFile, downloadDir);
+//unzipFile(downloadTempFile, downloadDir);
 
 app.on('window-all-closed', () => {
   app.quit()
@@ -94,7 +94,7 @@ function downloadFile(file_url , targetPath){
   });
 
   req.on('end', function() {
-    alert("File succesfully downloaded");
+    downloadFinished("File succesfully downloaded");
   });
 }
 
@@ -103,6 +103,11 @@ function showProgress(received,total){
   console.log(percentage + "% | " + received + " bytes out of " + total + " bytes.");
   downloadListener && downloadListener.showProgress(received,total);
 }
+
+function downloadFinished(){
+  downloadListener && downloadListener.downloadFinished();
+}
+
 ipcMain.on('get-downloader', (event, arg) => {
   // Print 1
   console.log(arg);
@@ -112,6 +117,9 @@ ipcMain.on('get-downloader', (event, arg) => {
        received : received,
        total    :total
      });
+   },
+   downloadFinished: function(){
+     event.sender.send('data-finished', {});
    }
  };
 // Reply on async message from renderer process
