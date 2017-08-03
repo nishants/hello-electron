@@ -60,7 +60,7 @@ function createWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
-downloadFile(fileUrl, downloadTempFile);
+//downloadFile(fileUrl, downloadTempFile);
 
 
 app.on('window-all-closed', () => {
@@ -78,6 +78,7 @@ app.on('activate', () => {
 })
 
 function downloadFile(file_url , targetPath){
+  downloadListener && downloadListener.start();
 
   var received_bytes = 0;
   var total_bytes = 0;
@@ -122,6 +123,9 @@ ipcMain.on('get-downloader', (event, arg) => {
   // Print 1
   console.log(arg);
  downloadListener = {
+   start: function(){
+     event.sender.send('download-started', {});
+   },
    showProgress: function(received,total){
      event.sender.send('data-received', {
        received : received,
